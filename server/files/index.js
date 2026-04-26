@@ -72,17 +72,48 @@ window.onload = function () {
   xhr.onload = function () {
     const listElement = document.querySelector("nav>ul");
 
+
+
     if (xhr.status === 200) {
       /* Task 1.3. Add the genre buttons to the listElement and 
          initialize them with a click handler that calls the 
          loadMovies(...) function above. */
-      const genres = JSON.parse(xhr.responseText);
+    const allLi = document.createElement("li");
+    const allBtn = document.createElement("button");
+    const genres = JSON.parse(xhr.responseText);
+
+    allBtn.textContent = "All";
+    allBtn.onclick = () => loadMovies();
+
+    allLi.appendChild(allBtn);
+    listElement.appendChild(allLi);
+
+    genres.forEach(genre => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+
+      btn.textContent = genre;
+      btn.onclick = () => loadMovies(genre);
+
+      li.appendChild(btn);
+      listElement.appendChild(li);
+    });
+
+
+
 
       /* When a first button exists, we click it to load all movies. */
       const firstButton = document.querySelector("nav button");
       if (firstButton) {
         firstButton.click();
       }
+    
+    
+    
+    
+    
+    
+    
     } else {
       document.querySelector("body").append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);
     }

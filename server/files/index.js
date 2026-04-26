@@ -63,6 +63,11 @@ function loadMovies(genre) {
   const url = new URL("/movies", location.href)
   /* Task 1.4. Add query parameter to the url if a genre is given */
 
+  if (genre) {
+  url.searchParams.set("genre", genre);
+  }
+
+
   xhr.open("GET", url)
   xhr.send()
 }
@@ -99,20 +104,11 @@ window.onload = function () {
       listElement.appendChild(li);
     });
 
-
-
-
       /* When a first button exists, we click it to load all movies. */
       const firstButton = document.querySelector("nav button");
       if (firstButton) {
         firstButton.click();
       }
-    
-    
-    
-    
-    
-    
     
     } else {
       document.querySelector("body").append(`Daten konnten nicht geladen werden, Status ${xhr.status} - ${xhr.statusText}`);

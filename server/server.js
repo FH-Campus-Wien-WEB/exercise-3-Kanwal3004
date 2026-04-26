@@ -36,7 +36,18 @@ app.get('/genres', (req, res) => {
 app.get('/movies', function (req, res) {
   //let movies = Object.values(movieModel)
   //res.send(movies);
-  res.json(Object.values(movieModel));
+  const movies = Object.values(movieModel);
+  const genre = req.query.genre;
+
+  if (!genre) {
+    return res.json(movies);
+  }
+
+  const filteredMovies = movies.filter(movie =>
+    movie.Genres.includes(genre)
+  );
+
+  res.json(filteredMovies);
 })
 
 // Configure a 'get' endpoint for a specific movie

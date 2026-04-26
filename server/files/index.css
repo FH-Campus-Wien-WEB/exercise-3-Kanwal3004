@@ -30,7 +30,41 @@ ul {
 }
 
 /* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
+@media (min-width: 768px) {
+  body {
+    display: grid;
 
+    grid-template-columns: 220px 1fr;
+    /* nav = fix (ca. 192–256px), main = rest */
+
+    grid-template-rows: 80px 1fr 80px;
+    /* header + footer fix, main flexibel */
+
+    grid-template-areas:
+      "h h"
+      "n m"
+      "f f";
+
+    height: 100vh;
+  }
+}
+
+header {
+  grid-area: h;
+}
+
+nav {
+  grid-area: n;
+}
+
+main {
+  grid-area: m;
+  overflow-y: auto;
+}
+
+footer {
+  grid-area: f;
+}
 
 /* Task 3.1. Make the header element a flex container and center its children
    vertically and horizontally.
